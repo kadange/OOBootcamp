@@ -1,0 +1,15 @@
+Given a car
+When driver park the car
+Then driver should get a ticket
+
+Given a ticket
+When driver gives ticket to parking lot
+Then driver can get car
+
+Given a car
+When no space in parking lot
+Then error NoParkingSpaceException
+
+Given a ticket
+When no car parked in parking lot
+Then error NoParckedCarException
