@@ -5,7 +5,7 @@ import java.util.*;
 public class ParkingLot {
 
     private int parkingLimit;
-    private Map<Ticket, Car> slot = new HashMap<>();
+    private Map<Ticket, Car> slot = new LinkedHashMap<>();
     private Car[] parking2;
 
     public ParkingLot(int parkingLimit) {
@@ -20,14 +20,22 @@ public class ParkingLot {
         }
     }
 
-    public Ticket park(Car car) throws Exception{
+    public List<Ticket> park(List<Car> cars) throws Exception {
+        List<Ticket> tickets = new ArrayList<>();
         if(!isParkValid()){
             throw new NoParkingSpaceException("No Parking Space Available!");
         }
 
-        List<Ticket> ticketList = getAvailableSlot();
-        slot.putIfAbsent(ticketList.get(0), car);
-        return ticketList.get(0);
+        List<Ticket> availableTickets = getAvailableSlot();
+        if(cars.size() > availableTickets.size()){
+            throw new NotEnoughParkingSpaceException("Not Enough Parking Space!");
+        }
+
+        for(int i=0; i<cars.size(); i++){
+            slot.putIfAbsent(availableTickets.get(i), cars.get(i));
+            tickets.add(availableTickets.get(i));
+        }
+        return tickets;
     }
 
     private List<Ticket> getAvailableSlot() {
@@ -54,11 +62,15 @@ public class ParkingLot {
     }
 
     public Car getCar(Ticket ticket) throws Exception{
-        if(!slot.containsKey(ticket)){
-            throw new NoCarParkedException("No car is parked!");
-        }
+        isTicketValid(ticket);
         Car car = slot.get(ticket);
         slot.replace(ticket, null);
         return car;
+    }
+
+    private void isTicketValid(Ticket ticket) throws NoCarParkedException {
+        if(!slot.containsKey(ticket)){
+            throw new NoCarParkedException("No car is parked!");
+        }
     }
 }
