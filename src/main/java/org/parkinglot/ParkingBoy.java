@@ -3,7 +3,7 @@ package org.parkinglot;
 import java.util.*;
 
 public class ParkingBoy {
-    private List<ParkingLot> managedParkingLots;
+    protected List<ParkingLot> managedParkingLots;
 
     public ParkingBoy(ParkingLot... parkingLots) {
         this.managedParkingLots = Arrays.asList(parkingLots);
@@ -18,12 +18,7 @@ public class ParkingBoy {
         return tickets;
     }
 
-    private ParkingLot getAvailableParkingLot() throws NoParkingSpaceException {
-//        return managedParkingLots.stream()
-//                .filter(managedParkingLot -> managedParkingLot.isParkingLotFull())
-//                .findAny()
-//                .get();
-//        List<ParkingLot> parkingLot = getParkingLotListWithMostAvailableSlot();
+    protected ParkingLot getAvailableParkingLot() throws NoParkingSpaceException {
         for (ParkingLot managedParkingLot : managedParkingLots) {
             if (!managedParkingLot.isParkingLotFull()) {
                 return managedParkingLot;
@@ -33,16 +28,6 @@ public class ParkingBoy {
         throw new NoParkingSpaceException("No Slots available on all parking lot");
     }
 
-    private List<ParkingLot> getParkingLotListWithMostAvailableSlot() {
-        Map<Integer, String> map = new LinkedHashMap<>();
-
-        for (ParkingLot managedParkingLot : managedParkingLots) {
-            int availableSlot = managedParkingLot.getAvailableSlots();
-            map.put(availableSlot, managedParkingLot.parkingName);
-        }
-
-        return null;
-    }
 
     public List<Car> getCars(List<Ticket> parkingTickets) throws ParkingLotNotExistingException, NoCarParkedException {
         List<Car> parkedCars = new ArrayList<>();

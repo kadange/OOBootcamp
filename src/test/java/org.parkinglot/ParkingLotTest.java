@@ -115,33 +115,35 @@ public class ParkingLotTest {
         assertEquals("parkingLotB", tickets.get(1).parkingName);
     }
 
-//    @Test
-//    public void parking_boy_should_park_car_on_the_parking_lot_that_has_most_available_slots() throws Exception {
-//        ParkingLot parkingLotA = new ParkingLot("parkingLotA", 5);
-//        ParkingLot parkingLotB = new ParkingLot("parkingLotB", 5);
-//        ParkingBoy parkingBoy = new ParkingBoy(parkingLotA, parkingLotB);
-//        List<Car> carListA = new ArrayList<>();
-//        Car carA = new Car();
-//        Car carB = new Car();
-//        Car carC = new Car();
-//        carListA.add(carA);
-//        carListA.add(carB);
-//        carListA.add(carC);
-//
-//        List<Ticket> ticketListA = parkingBoy.park(carListA);
+    @Test
+    public void parking_boy_should_park_car_on_the_parking_lot_that_has_most_available_slots() throws Exception {
+        ParkingLot parkingLotA = new ParkingLot("parkingLotA", 5);
+        ParkingLot parkingLotB = new ParkingLot("parkingLotB", 5);
+        SmartParkingBoy smartParkingBoy = new SmartParkingBoy(parkingLotA, parkingLotB);
+        List<Car> carListA = new ArrayList<>();
+        Car carA = new Car();
+        Car carB = new Car();
+        carListA.add(carA);
+        carListA.add(carB);
+
+        List<Ticket> ticketListA = smartParkingBoy.park(carListA);
+        assertEquals("parkingLotA", ticketListA.get(0).parkingName);
+        assertEquals("parkingLotB", ticketListA.get(1).parkingName);
 //        for (Ticket ticket : ticketListA) {
 //            assertEquals("parkingLotA", ticket.parkingName);
 //        }
-//
-////        List<Car> carListB = new ArrayList<>();
-////        Car carC = new Car();
-////        Car carD = new Car();
-////        carListB.add(carC);
-////        carListB.add(carD);
-//
-////        List<Ticket> ticketListB = parkingBoy.park(carListB);
-////        for (Ticket ticket : ticketListB) {
-////            assertEquals("parkingLotB", ticket.parkingName);
-////        }
-//    }
+
+        List<Car> carListB = new ArrayList<>();
+        Car carC = new Car();
+        Car carD = new Car();
+        carListB.add(carC);
+        carListB.add(carD);
+
+        List<Ticket> ticketListB = smartParkingBoy.park(carListB);
+        assertEquals("parkingLotA", ticketListB.get(0).parkingName);
+        assertEquals("parkingLotB", ticketListB.get(1).parkingName);
+//        for (Ticket ticket : ticketListB) {
+//            assertEquals("parkingLotB", ticket.parkingName);
+//        }
+    }
 }
