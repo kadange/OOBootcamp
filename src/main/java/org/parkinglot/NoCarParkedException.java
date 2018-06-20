@@ -6,10 +6,6 @@ public class NoCarParkedException extends Exception{
 
     public NoCarParkedException(String message) {
         this.message = message;
-        throwException();
     }
 
-    private Exception throwException() {
-        return new Exception(message);
-    }
 }

@@ -3,12 +3,7 @@ package org.parkinglot;
 public class NoParkingSpaceException extends Exception{
     private String message;
 
-    public NoParkingSpaceException(String message) throws Exception {
+    public NoParkingSpaceException(String message) {
         this.message = message;
-        throwException();
-    }
-
-    private Exception throwException() throws Exception {
-        throw new Exception(message);
     }
 }
