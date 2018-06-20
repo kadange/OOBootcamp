@@ -7,7 +7,6 @@ public class ParkingLot {
     public String parkingName;
     private int parkingLimit;
     private Map<Ticket, Car> slot = new LinkedHashMap<>();
-    private Car[] parking2;
 
     public ParkingLot(String parkingName, int parkingLimit) {
         this.parkingName = parkingName;
@@ -33,24 +32,6 @@ public class ParkingLot {
         return availableTicket;
     }
 
-//    public List<Ticket> park(List<Car> cars) throws Exception {
-//        List<Ticket> tickets = new ArrayList<>();
-//        if(isParkingLotFull()){
-//            throw new NoParkingSpaceException("No Parking Space Available!");
-//        }
-//
-//        List<Ticket> availableTickets = getTicketOfFirstAvailableSlot();
-//        if(cars.size() > availableTickets.size()){
-//            throw new NotEnoughParkingSpaceException("Not Enough Parking Space!");
-//        }
-//
-//        for(int i=0; i<cars.size(); i++){
-//            slot.putIfAbsent(availableTickets.get(i), cars.get(i));
-//            tickets.add(availableTickets.get(i));
-//        }
-//        return tickets;
-//    }
-
     private Ticket getTicketOfFirstAvailableSlot() {
         for(Ticket ticket : slot.keySet()){
             if(slot.get(ticket) == null){
@@ -60,7 +41,7 @@ public class ParkingLot {
         return null;
     }
 
-    private boolean isParkingLotFull(){
+    protected boolean isParkingLotFull(){
         boolean isFull = true;
 
         for(Ticket ticket : slot.keySet()){
@@ -84,5 +65,15 @@ public class ParkingLot {
         if(!slot.containsKey(ticket)){
             throw new NoCarParkedException("No car is parked!");
         }
+    }
+
+    public int getAvailableSlots() {
+        int availableSlots = 0;
+        for(Ticket ticket : slot.keySet()){
+            if(slot.get(ticket) == null){
+                availableSlots++;
+            }
+        }
+        return availableSlots;
     }
 }

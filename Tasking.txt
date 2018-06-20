@@ -27,3 +27,13 @@ Then error NotEnoughParkingSpace
 Given multiple ticket
 When getting the cars
 Then driver can get the cars
+
+Requirement#3 ===================================
+Given a multiple car
+When slot in first parking lot is not sufficient
+Then park on next parking lot
+
+Requirement#4 ===================================
+Given a car
+When parking boy park
+Then park car in parking lot with most available parking slot

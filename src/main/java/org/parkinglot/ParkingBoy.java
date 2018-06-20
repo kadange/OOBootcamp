@@ -1,8 +1,6 @@
 package org.parkinglot;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.List;
+import java.util.*;
 
 public class ParkingBoy {
     private List<ParkingLot> managedParkingLots;
@@ -14,14 +12,36 @@ public class ParkingBoy {
     public List<Ticket> park(List<Car> cars) throws Exception {
         List<Ticket> tickets = new ArrayList<>();
         for (Car car : cars) {
-            ParkingLot parkingLot = getMostAvailableParkingLot();
+            ParkingLot parkingLot = getAvailableParkingLot();
             tickets.add(parkingLot.park(car));
         }
         return tickets;
     }
 
-    private ParkingLot getMostAvailableParkingLot() {
-        return managedParkingLots.get(0);
+    private ParkingLot getAvailableParkingLot() throws NoParkingSpaceException {
+//        return managedParkingLots.stream()
+//                .filter(managedParkingLot -> managedParkingLot.isParkingLotFull())
+//                .findAny()
+//                .get();
+//        List<ParkingLot> parkingLot = getParkingLotListWithMostAvailableSlot();
+        for (ParkingLot managedParkingLot : managedParkingLots) {
+            if (!managedParkingLot.isParkingLotFull()) {
+                return managedParkingLot;
+            }
+        }
+
+        throw new NoParkingSpaceException("No Slots available on all parking lot");
+    }
+
+    private List<ParkingLot> getParkingLotListWithMostAvailableSlot() {
+        Map<Integer, String> map = new LinkedHashMap<>();
+
+        for (ParkingLot managedParkingLot : managedParkingLots) {
+            int availableSlot = managedParkingLot.getAvailableSlots();
+            map.put(availableSlot, managedParkingLot.parkingName);
+        }
+
+        return null;
     }
 
     public List<Car> getCars(List<Ticket> parkingTickets) throws ParkingLotNotExistingException, NoCarParkedException {
