@@ -67,13 +67,17 @@ public class ParkingLot {
         }
     }
 
-    public int getAvailableSlots() {
-        int availableSlots = 0;
+    public double getAvailableSlots() {
+        double availableSlots = 0;
         for(Ticket ticket : slot.keySet()){
             if(slot.get(ticket) == null){
                 availableSlots++;
             }
         }
         return availableSlots;
+    }
+
+    protected double getParkingLotSize() {
+        return (double)slot.size();
     }
 }

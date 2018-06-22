@@ -35,5 +35,10 @@ Then park on next parking lot
 
 Requirement#4 ===================================
 Given a car
-When parking boy park
+When smart parking boy park
 Then park car in parking lot with most available parking slot
+
+Requirement#5 ===================================
+Given a car
+When super parking boy park
+Then park car in parking lot with most available parking rate

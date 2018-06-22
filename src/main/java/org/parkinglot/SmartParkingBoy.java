@@ -2,7 +2,7 @@ package org.parkinglot;
 
 public class SmartParkingBoy extends ParkingBoy {
 
-    public SmartParkingBoy(ParkingLot... parkingLots) {
+    SmartParkingBoy(ParkingLot... parkingLots) {
         super(parkingLots);
     }
 
@@ -10,21 +10,20 @@ public class SmartParkingBoy extends ParkingBoy {
     protected ParkingLot getAvailableParkingLot() throws NoParkingSpaceException {
         ParkingLot parkingLot = getParkingLotListWithMostAvailableSlot();
 
-        if(parkingLot != null){
+        if (parkingLot != null) {
             return parkingLot;
         }
         throw new NoParkingSpaceException("No Slots available on all parking lot");
     }
 
-        private ParkingLot getParkingLotListWithMostAvailableSlot() {
+    private ParkingLot getParkingLotListWithMostAvailableSlot() {
         ParkingLot parkingLotWithMostAvailableSpace = null;
         for (ParkingLot managedParkingLot : managedParkingLots) {
             if (managedParkingLot.isParkingLotFull()) {
                 continue;
             }
-            if(parkingLotWithMostAvailableSpace == null){
-                parkingLotWithMostAvailableSpace = managedParkingLot;
-            } else if(parkingLotWithMostAvailableSpace.getAvailableSlots() < managedParkingLot.getAvailableSlots()){
+
+            if (parkingLotWithMostAvailableSpace == null || parkingLotWithMostAvailableSpace.getAvailableSlots() < managedParkingLot.getAvailableSlots()) {
                 parkingLotWithMostAvailableSpace = managedParkingLot;
             }
         }

@@ -3,13 +3,13 @@ package org.parkinglot;
 import java.util.*;
 
 public class ParkingBoy {
-    protected List<ParkingLot> managedParkingLots;
+    List<ParkingLot> managedParkingLots;
 
-    public ParkingBoy(ParkingLot... parkingLots) {
+    ParkingBoy(ParkingLot... parkingLots) {
         this.managedParkingLots = Arrays.asList(parkingLots);
     }
 
-    public List<Ticket> park(List<Car> cars) throws Exception {
+    List<Ticket> park(List<Car> cars) throws Exception {
         List<Ticket> tickets = new ArrayList<>();
         for (Car car : cars) {
             ParkingLot parkingLot = getAvailableParkingLot();
@@ -29,7 +29,7 @@ public class ParkingBoy {
     }
 
 
-    public List<Car> getCars(List<Ticket> parkingTickets) throws ParkingLotNotExistingException, NoCarParkedException {
+    List<Car> getCars(List<Ticket> parkingTickets) throws ParkingLotNotExistingException, NoCarParkedException {
         List<Car> parkedCars = new ArrayList<>();
         for (Ticket parkingTicket : parkingTickets) {
             ParkingLot parkingLot = getParkingLot(parkingTicket);
@@ -40,7 +40,7 @@ public class ParkingBoy {
 
     private ParkingLot getParkingLot(Ticket parkingTicket) throws ParkingLotNotExistingException {
         for (ParkingLot managedParkingLot : managedParkingLots) {
-            if(managedParkingLot.parkingName == parkingTicket.parkingName){
+            if(managedParkingLot.parkingName.equals(parkingTicket.parkingName)){
                 return managedParkingLot;
             }
         }
