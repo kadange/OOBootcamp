@@ -1,7 +1,6 @@
 package org.parkinglot;
 
 public class SmartParkingBoy extends ParkingBoy {
-
     SmartParkingBoy(ParkingLot... parkingLots) {
         super(parkingLots);
     }
@@ -30,4 +29,5 @@ public class SmartParkingBoy extends ParkingBoy {
 
         return parkingLotWithMostAvailableSpace;
     }
+
 }

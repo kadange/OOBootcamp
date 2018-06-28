@@ -5,6 +5,7 @@ import java.util.*;
 public class ParkingLot {
 
     public String parkingName;
+
     private int parkingLimit;
     private Map<Ticket, Car> slot = new LinkedHashMap<>();
 
@@ -80,4 +81,5 @@ public class ParkingLot {
     protected double getParkingLotSize() {
         return (double)slot.size();
     }
+
 }

@@ -1,6 +1,8 @@
 package org.parkinglot;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
 
 public class ParkingBoy {
     List<ParkingLot> managedParkingLots;
@@ -46,5 +48,13 @@ public class ParkingBoy {
         }
 
         throw new ParkingLotNotExistingException(parkingTicket.parkingName + " is not existing!");
+    }
+
+    public void setManagedParkingLots(List<ParkingLot> managedParkingLots) {
+        this.managedParkingLots = managedParkingLots;
+    }
+
+    public List<ParkingLot> getManagedParkingLots() {
+        return managedParkingLots;
     }
 }

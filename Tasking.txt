@@ -42,3 +42,18 @@ Requirement#5 ===================================
 Given a car
 When super parking boy park
 Then park car in parking lot with most available parking rate
+
+Requirement#6 ===================================
+Given a parking manager
+When parking boy is available
+Then manage parking boy
+
+Given a car
+When Parking manager have a parking boy
+Then parking boy should park the car
+
+Given a car
+When parking manager don't have a parking boy
+Then parking manager should park the car
+
+Requirement#7 ===================================
